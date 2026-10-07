@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {execFileSync} from 'node:child_process';
+import {fileURLToPath} from 'node:url';
+const root=path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+const pin=JSON.parse(fs.readFileSync(path.join(root,'host/upstream.json'),'utf8'));
+const host=path.resolve(process.argv[2]||path.join(root,'.cache/hosts/clawd-on-desk'));
+const sha=execFileSync('git',['rev-parse','HEAD'],{cwd:host,encoding:'utf8'}).trim();
+if(sha!==pin.commit)throw Error('Upstream revision changed; follow docs/UPSTREAM.md before launch.');
+const changes=execFileSync('git',['diff','--name-only'],{cwd:host,encoding:'utf8'}).trim().split(/\r?\n/).filter(Boolean);
+if(changes.length)throw Error('The host must remain unmodified: '+changes.join(', '));
+if(fs.existsSync(path.join(host,'src/raster-gaze.js')))throw Error('Retired gaze extension remains in host.');
+console.log(`Unmodified upstream host OK: Clawd ${pin.packageVersion} / ${sha.slice(0,12)}`);

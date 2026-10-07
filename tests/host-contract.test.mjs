@@ -1,0 +1,21 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {createRequire} from 'node:module';
+import {fileURLToPath} from 'node:url';
+import assert from 'node:assert/strict';
+import test from 'node:test';
+const root=path.dirname(path.dirname(fileURLToPath(import.meta.url))),require=createRequire(import.meta.url);
+const host=path.join(root,'.cache/hosts/clawd-on-desk');
+const present=fs.existsSync(path.join(host,'src/theme-schema.js'));
+test('standard Clawd loads the theme without a custom gaze extension',{skip:!present},()=>{
+  const schema=require(path.join(host,'src/theme-schema.js'));
+  const createContext=require(path.join(host,'src/theme-context.js'));
+  const raw=JSON.parse(fs.readFileSync(path.join(root,'dist/mysekai-clawd/themes/pjsk-ichika/theme.json'),'utf8'));
+  assert.deepEqual(schema.validateTheme(raw),[]);
+  const normalized=schema.mergeDefaults(raw,'pjsk-ichika',false);
+  normalized._themeDir=path.join(root,'dist/mysekai-clawd/themes/pjsk-ichika');
+  assert.equal(raw.rasterGaze,undefined);
+  assert.equal(createContext(normalized).getRendererConfig().rasterGaze,undefined);
+  assert.equal(raw.eyeTracking.enabled,false);
+  assert.equal(fs.existsSync(path.join(host,'src/raster-gaze.js')),false);
+});
