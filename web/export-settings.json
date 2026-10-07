@@ -1,0 +1,9 @@
+{
+  "revision": "0.3.0-hd1",
+  "fps": 60,
+  "width": 384,
+  "height": 416,
+  "supersample": 2,
+  "columns": 8,
+  "framesPerPage": 128
+}

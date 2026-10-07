@@ -1,0 +1,21 @@
+{
+  "repository": "https://github.com/rullerzhou-afk/clawd-on-desk.git",
+  "commit": "c0b0c13be63bc2fddceb07da6bc92d06efccf975",
+  "packageVersion": "1.2.0",
+  "auditedOn": "2026-10-07",
+  "changedFiles": [],
+  "reviewOnUpgrade": [
+    "src/theme-schema.js",
+    "src/theme-context.js",
+    "src/theme-loader.js",
+    "src/renderer.js",
+    "src/tick.js",
+    "src/preload.js",
+    "src/state-visual-resolver.js",
+    "src/theme-sanitizer.js",
+    "hooks/dsh-clawd-bridge",
+    "hooks/codex-hook.js",
+    "hooks/clawd-hook.js",
+    "package.json"
+  ]
+}

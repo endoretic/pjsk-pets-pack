@@ -1,0 +1,8 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MYSEKAI Pet Studio</title>
+<link rel="stylesheet" href="/app/style.css">
+<script type="importmap">{"imports":{"three":"/vendor/three/three.module.js"}}</script></head>
+<body><header><span class="logo">MY<span>SEKAI</span></span><span class="sub">PET STUDIO · JP</span><span id="count"></span></header>
+<main><section class="stage-panel"><div class="intro"><span class="eyebrow">小小世界，陪你工作</span><h1 id="name">加载角色…</h1><p id="detail"></p></div><div id="stage"><canvas id="preview"></canvas></div><div class="toolbar"><label><input type="checkbox" id="gaze"> 视线跟随</label><label><input type="checkbox" id="pause"> 暂停</label><label>视角 <input type="range" id="angle" min="-180" max="180" value="0"></label></div><p id="status" role="status">正在读取 JP 原生模型与动作。</p></section>
+<aside><label class="eyebrow" for="character">CHARACTER / 角色</label><select id="character"></select><h2>工作与互动</h2><div id="states" class="buttons"></div><h2>更多原生动作</h2><div id="extras" class="buttons"></div><div class="export"><button id="capture-enhanced-current">导出当前角色</button><button id="capture-enhanced" class="secondary">批量导出全部角色</button><small>统一 Clawd 主题 · 384×416 · 60 fps</small></div></aside></main>
+<footer>JP 模型与动作直接渲染 · 本地预览 · 游戏素材归原权利方所有</footer><script type="module" src="/app/viewer.mjs"></script></body></html>
